@@ -4,7 +4,7 @@
             template: res,
             props: ['array', "paging"],
             methods: {
-                fatherFun: function (item) {
+                fatherFun: item => {
                     if (vm.search) {
                         vm.search(item);
                     }

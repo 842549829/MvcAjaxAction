@@ -1,4 +1,4 @@
-﻿var vm = new Vue({
+﻿let vm = new Vue({
     el: '#app',
     data: {
         // 数据
@@ -27,10 +27,10 @@
             return this.items.length;
         },
         pageSizeArray: function () {
-            var array = new Array();
-            var index = this.paging.pageIndex;
-            var size = this.paging.pageSize;
-            for (var i = index - 4; i <= index + 4; i++) {
+            let array = new Array();
+            let index = this.paging.pageIndex;
+            let size = this.paging.pageSize;
+            for (let i = index - 4; i <= index + 4; i++) {
                 if (i === index) {
                     array.push({ isFirst: true, value: i });
                 } else if (i > 0 && i <= this.paging.pageCount) {
@@ -51,30 +51,30 @@
             return { "PageSize": pageSize, "PageIndex": pageIndex, "GetRowCount": true };
         },
         getCondtionModel: function () {
-            var model = new Object();
+            let model = new Object();
             model.Address = $.trim($("#txtAddress").val());
             model.Name = $.trim($("#txtName").val());
             model.MOBile = $.trim($("#txtMobile").val());
             return model;
         },
         bindData: function (self, data) {
-            var d = data.Person;
+            let d = data.Person;
             self.items = [];
             self.paging.pageSize = data.Pagination.PageSize;
             self.paging.pageIndex = data.Pagination.PageIndex;
             self.paging.dataCount = data.Pagination.RowCount;
             self.paging.pageCount = parseInt((self.paging.dataCount + self.paging.pageSize - 1) / self.paging.pageSize);
-            for (var i = 0; i < d.length; i++) {
+            for (let i = 0; i < d.length; i++) {
                 self.$set(vm.items, i, d[i]);
             }
         },
         queryPaging: function (pageIndex, pageSize) {
-            var self = this;
+            let self = this;
             if (!pageIndex) {
                 pageIndex = 1;
             }
             pageSize = pageSize || 10;
-            var condition = new Object();
+            let condition = new Object();
             condition.Person = this.getCondtionModel();
             condition.Pagination = this.getQueryPagination(pageIndex, pageSize);
             $.net.Default.GetParameters(condition, {
