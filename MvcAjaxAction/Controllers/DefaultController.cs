@@ -66,30 +66,42 @@ namespace MvcAjaxAction.Controllers
         private static List<Person> QueryData()
         {
             string[] names = new[] { "张三", "李四", "王五", "许昌", "何达" };
+            int[] ages = new[] { 14, 56, 43, 21, 54 };
+            string[] addrses = new[] { "上海市长宁区天山路8号5楼", "浙江金华市李渔路1118号创新大厦", "长宁区福泉路99号携程网络技术大楼B1楼(近天山西路)", "深圳市南山区科技园飞亚达大厦3-10楼", "浙江省杭州市西湖区天目山路266号黄龙时代广场支付宝大楼3楼" };
             var list = new List<Person>();
             for (int i = 0; i < 235; i++)
             {
                 Random random = new Random();
-                Person person = new Person { Id = i, Age = i, Address = "address" + i, Mobile = "1355115457" + i, Height = i, Weight = i, Remark = "格斯达克沙地上多空双方的伤口附近的客服电话开机" + i };
+                Person person = new Person { Id = i, Address = "address" + i, Mobile = "1355115457" + i, Height = i, Weight = i, Remark = "" + i };
                 if (i % 1 == 1)
                 {
                     person.Name = names[0];
+                    person.Age = ages[0];
+                    person.Address = addrses[0];
                 }
                 else if (i % 2 == 0)
                 {
                     person.Name = names[1];
+                    person.Age = ages[1];
+                    person.Address = addrses[1];
                 }
                 else if (i % 3 == 0)
                 {
                     person.Name = names[2];
+                    person.Age = ages[2];
+                    person.Address = addrses[2];
                 }
                 else if (i % 4 == 0)
                 {
                     person.Name = names[3];
+                    person.Age = ages[3];
+                    person.Address = addrses[3];
                 }
                 else
                 {
                     person.Name = names[4];
+                    person.Age = ages[4];
+                    person.Address = addrses[4];
                 }
                 list.Add(person);
             }
