@@ -1,0 +1,33 @@
+﻿<table class="table table-bordered table-hover">
+    <thead>
+        <tr class="active">
+            <th>Id</th>
+            <th>名字</th>
+            <th>年龄</th>
+            <th>地址</th>
+            <th>手机</th>
+            <th>身高</th>
+            <th>体重</th>
+            <th>备注</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr v-if="dataLength <= 0">
+            <td class="container" colspan="16">暂无数据</td>
+        </tr>
+        <tr v-else v-for="item in items">
+            <td>{{item.Id}}</td>
+            <td>{{item.Name}}</td>
+            <td>{{item.Age}}</td>
+            <td>{{item.Address}}</td>
+            <td>{{item.Mobile}}</td>
+            <td>{{item.Height}}</td>
+            <td>{{item.Weight}}</td>
+            <td>{{item.Remark}}</td>
+            <td>
+                <a href='javascript:operation(${Id});'>操作</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,17 @@
+﻿<div id="pager" v-if="paging.pageCount > 0" class="container">
+    <ul class="pagination vertical-middle">
+        <template v-if="paging.pageIndex > 1">
+            <li><a href="javascript:void(0)" v-on:click="fatherFun(1)">首页</a></li>
+            <li><a href="javascript:void(0)" v-on:click="fatherFun(paging.pageIndex - 1)">上一页</a></li>
+        </template>
+        <template v-for="item in array">
+            <li v-if="item.isFirst == true" class="active"><a href="javascript:void(0)" disabled="disabled">{{item.value}}</a></li>
+            <li v-else="item.isFirst == false"><a href="javascript:void(0)" v-on:click="fatherFun(item.value)">{{item.value}}</a></li>
+        </template>
+        <template v-if="paging.pageIndex < paging.pageCount">
+            <li><a href="javascript:void(0)" v-on:click="fatherFun(paging.pageIndex + 1)">下一页</a></li>
+            <li><a href="javascript:void(0)" v-on:click="fatherFun(paging.pageCount)">尾页</a></li>
+        </template>
+    </ul>
+    <span class="margin">共 <span>{{paging.dataCount}}</span>条 每页<span>{{paging.pageSize}}</span>条 第<span>{{paging.pageIndex}}</span><span>{{paging.pageCount}}</span>页</span>
+</div>

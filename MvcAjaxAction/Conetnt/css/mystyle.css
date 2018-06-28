@@ -1,0 +1,44 @@
+﻿body {
+    padding-top: 60px;
+}
+
+#app {
+    margin: 5px;
+    border: solid 2px #F8F8F8;
+}
+
+#pager li {
+    cursor: pointer;
+}
+
+#condition {
+    padding-left: 15px;
+}
+
+#pager .vertical-middle {
+    display: inline-block;
+    margin: 20px;
+    vertical-align: middle;
+}
+
+.navbar-inverse form input[type="text"] {
+    background: #333;
+    border: none;
+    color: #999;
+}
+
+.navbar-inverse form button[type="submit"] {
+    background: none;
+    border: none;
+    color: #999;
+}
+
+.navbar-inverse form {
+    position: relative;
+}
+
+    .navbar-inverse form .glyphicon-search {
+        position: absolute;
+        top: 27%;
+        right: 40px;
+    }
