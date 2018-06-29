@@ -1,4 +1,4 @@
-﻿Vue.component("parent-template", (resolve, reject) => {
+﻿Vue.component("paging-template", resolve => {
     $.get("/conetnt/template/pagingTemplate.html").then(res =>
         resolve({
             template: res,

@@ -13,7 +13,7 @@
     },
     // 局部组件
     components: {
-        "table-template": (resolve, reject) => {
+        "table-template": resolve => {
             $.get("/conetnt/template/tableTemplate.html").then(res =>
                 resolve({
                     template: res,
@@ -29,7 +29,6 @@
         pageSizeArray: function () {
             let array = new Array();
             let index = this.paging.pageIndex;
-            let size = this.paging.pageSize;
             for (let i = index - 4; i <= index + 4; i++) {
                 if (i === index) {
                     array.push({ isFirst: true, value: i });
