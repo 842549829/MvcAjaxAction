@@ -108,5 +108,14 @@ namespace MvcAjaxAction.Controllers
 
             return list;
         }
+
+        /// <summary>
+        /// 菜单测试页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Menu()
+        {
+            return this.View();
+        }
     }
 }

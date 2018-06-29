@@ -1,0 +1,23 @@
+﻿<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <ul class="nav navbar-nav" id="navMenu">
+            <li class="active" id="Index">
+                <a href="@Url.Action("Index","Default")">分页测试</a>
+            </li>
+            <li id="Menu"><a href="@Url.Action("Menu","Default")">菜单递归</a></li>
+        </ul>
+        <form action="#" class="navbar-form navbar-left">
+            <input type="text" class="form-control" placeholder="请输入搜索内容" />
+            <button type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </form>
+        <div class="navbar-right">
+            <ul class="nav navbar-nav">
+                <li><a>注册</a></li>
+                <li><a>登录</a></li>
+            </ul>
+            <p class="navbar-text">您好:<a href="#" class="navbar-link">喳喳</a></p>
+        </div>
+    </div>
+</nav>

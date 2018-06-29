@@ -101,6 +101,7 @@
     <Content Include="Conetnt\lib\bootstrap-3.3.7-dist\js\npm.js" />
     <Content Include="Conetnt\lib\jquery-1.7.2.min.js" />
     <Content Include="Conetnt\lib\vue.min.js" />
+    <Content Include="Conetnt\widget\common.js" />
     <Content Include="Global.asax" />
     <Content Include="Conetnt\template\pagingTemplate.html" />
     <Content Include="Conetnt\template\tableTemplate.html" />
@@ -133,6 +134,10 @@
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Default\Index.cshtml" />
+    <Content Include="Views\Default\Menu.cshtml" />
+    <Content Include="Views\Shared\_Nav.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
