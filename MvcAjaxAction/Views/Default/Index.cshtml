@@ -1,4 +1,7 @@
-﻿@{ Html.RenderPartial("~/Views/Shared/_Nav.cshtml"); }
+﻿@section Header{
+    <link href="/Conetnt/css/mystyle.css" rel="stylesheet" />
+}
+@{ Html.RenderPartial("~/Views/Shared/_Nav.cshtml"); }
 <div id="app" class="container-fluid">
     <div class="h6"></div>
     <div class="alert nav navbar-default">

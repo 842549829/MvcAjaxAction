@@ -1,1 +1,147 @@
-﻿@{ Html.RenderPartial("~/Views/Shared/_Nav.cshtml"); }
+﻿@section Header{
+    <link href="/Conetnt/css/mystyle.css" rel="stylesheet" />
+}
+@{ Html.RenderPartial("~/Views/Shared/_Nav.cshtml"); }
+<div class="container-fluid">
+    <div class="h1">
+        <hr />
+    </div>
+    <div class="row">
+        <div class="col-sm-6 alert-danger">数据格式</div>
+        <div class="col-sm-6 alert-success">展示效果</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <pre>
+                [{
+	                id: 1,
+	                name: "办公管理",
+	                children: [{
+		                id: 2,
+		                name: "请假申请",
+		                children: [{
+			                id: 4,
+			                name: "请假记录"
+		                }]
+	                }, {
+		                id: 3,
+		                name: "出差申请"
+	                }]
+                }, {
+	                id: 5,
+	                name: "系统设置",
+	                children: [{
+		                id: 6,
+		                name: "权限管理",
+		                children: [{
+			                id: 7,
+			                name: "用户角色"
+		                }, {
+			                id: 8,
+			                name: "菜单设置"
+		                }]
+	                }]
+                }]
+            </pre>
+        </div>
+        <div class="col-sm-6">
+            <div id="app1"></div>
+        </div>
+    </div>
+    <div class="h1">
+        <hr />
+    </div>
+    <div class="row">
+        <div class="col-sm-6 alert-danger">数据格式</div>
+        <div class="col-sm-6 alert-success">展示效果</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <pre>
+            [
+                { id: 1, name: "办公管理", pid: 0 },
+                { id: 2, name: "请假申请", pid: 1 },
+                { id: 3, name: "出差申请", pid: 1 },
+                { id: 4, name: "请假记录", pid: 2 },
+                { id: 5, name: "系统设置", pid: 0 },
+                { id: 6, name: "权限管理", pid: 5 },
+                { id: 7, name: "用户角色", pid: 6 },
+                { id: 8, name: "菜单设置", pid: 6 },
+            ]
+            </pre>
+        </div>
+        <div class="col-sm-6">
+            <div id="app2"></div>
+        </div>
+    </div>
+    <div class="h1">
+        <hr />
+    </div>
+</div>
+<script>
+    var menusHtml = new Array();
+    $(function () {
+        var json = [{ id: 1, name: "办公管理", children: [{ id: 2, name: "请假申请", children: [{ id: 4, name: "请假记录" }] }, { id: 3, name: "出差申请" }] }, { id: 5, name: "系统设置", children: [{ id: 6, name: "权限管理", children: [{ id: 7, name: "用户角色" }, { id: 8, name: "菜单设置" }] }] }];
+        getMenu(json)
+        $("#app1").append(menusHtml.join(""));
+    });
+    function getMenu(arry) {
+        if (arry.length > 0) {
+            menusHtml.push('<ul>');
+            for (var i in arry) {
+                menusHtml.push('<li>' + arry[i].name);
+                if (arry[i].children !== undefined && arry[i].children !== null) {
+                    getMenu(arry[i].children);
+                }
+                menusHtml.push('</li>');
+            }
+            menusHtml.push('</ul>');
+        }
+    }
+    function getChildren(arry) {
+        var newArry = new Array();
+        for (var i in arry) {
+            if (arry[i].children != null)
+                newArry.push(arry[i]);
+        }
+        return newArry;
+    }
+</script>
+
+<script type="text/javascript">
+    var menus = new Array();
+    $(function () {
+        var menuArry = [
+            { id: 1, name: "办公管理", pid: 0 },
+            { id: 2, name: "请假申请", pid: 1 },
+            { id: 3, name: "出差申请", pid: 1 },
+            { id: 4, name: "请假记录", pid: 2 },
+            { id: 5, name: "系统设置", pid: 0 },
+            { id: 6, name: "权限管理", pid: 5 },
+            { id: 7, name: "用户角色", pid: 6 },
+            { id: 8, name: "菜单设置", pid: 6 },
+        ];
+        getData(0, menuArry)
+        $("#app2").append(menus.join(""));
+    });
+    function getData(id, arry) {
+        var childArry = getParentArry(id, arry);
+        if (childArry.length > 0) {
+            menus.push('<ul>');
+            for (var i in childArry) {
+                menus.push('<li>' + childArry[i].name);
+                getData(childArry[i].id, arry);
+                menus.push('</li>');
+            }
+            menus.push('</ul>');
+        }
+    }
+    function getParentArry(id, arry) {
+        var newArry = new Array();
+        for (var i in arry) {
+            if (arry[i].pid == id)
+                newArry.push(arry[i]);
+        }
+        return newArry;
+    }
+</script>
