@@ -1,9 +1,7 @@
 ﻿using AjaxHandler;
 using MvcAjaxAction.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Web.Mvc;
 
 namespace MvcAjaxAction.Controllers
@@ -65,13 +63,12 @@ namespace MvcAjaxAction.Controllers
         /// <returns>测试数据</returns>
         private static List<Person> QueryData()
         {
-            string[] names = new[] { "张三", "李四", "王五", "许昌", "何达" };
-            int[] ages = new[] { 14, 56, 43, 21, 54 };
-            string[] addrses = new[] { "上海市长宁区天山路8号5楼", "浙江金华市李渔路1118号创新大厦", "长宁区福泉路99号携程网络技术大楼B1楼(近天山西路)", "深圳市南山区科技园飞亚达大厦3-10楼", "浙江省杭州市西湖区天目山路266号黄龙时代广场支付宝大楼3楼" };
+            string[] names = { "张三", "李四", "王五", "许昌", "何达" };
+            int[] ages = { 14, 56, 43, 21, 54 };
+            string[] addrses = { "上海市长宁区天山路8号5楼", "浙江金华市李渔路1118号创新大厦", "长宁区福泉路99号携程网络技术大楼B1楼(近天山西路)", "深圳市南山区科技园飞亚达大厦3-10楼", "浙江省杭州市西湖区天目山路266号黄龙时代广场支付宝大楼3楼" };
             var list = new List<Person>();
             for (int i = 0; i < 235; i++)
             {
-                Random random = new Random();
                 Person person = new Person { Id = i, Address = "address" + i, Mobile = "1355115457" + i, Height = i, Weight = i, Remark = "" + i };
                 if (i % 1 == 1)
                 {
@@ -115,7 +112,15 @@ namespace MvcAjaxAction.Controllers
         /// <returns></returns>
         public ActionResult Menu()
         {
-            return this.View();
+            return View();
+        }
+
+        /// <summary>
+        /// Vue
+        /// </summary>
+        /// <returns>视图</returns>
+        public ActionResult Vue() {
+            return View();
         }
     }
 }

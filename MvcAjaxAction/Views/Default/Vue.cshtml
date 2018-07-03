@@ -1,0 +1,68 @@
+﻿@section Header{
+    <link href="/Conetnt/css/index.css" rel="stylesheet" />
+}
+@{ Html.RenderPartial("~/Views/Shared/_Nav.cshtml"); }
+<div class="container-fluid">
+    <div class="h1">
+        <hr />
+    </div>
+    <h1>组件</h1>
+    <div class="row">
+        <div class="col-lg-pull-12" id="slot">
+            <slot-component v-bind:list-data="list"><span>{{msg}}</span></slot-component>
+            <event-component v-on:test="myTestEvent"></event-component>
+        </div>
+    </div>
+</div>
+@section Footer{
+    <script>
+        /*
+        props: ['title', 'likes', 'isPublished', 'commentIds', 'author']
+        props: {
+            title: String,
+            likes: Number,
+            isPublished: Boolean,
+            commentIds: Array,
+            author: Object
+        }
+        */
+        //var eventComponent = Vue.extend({
+        //    methods: {
+        //        myEvent: function (value) {
+        //            this.$emit('test', value);
+        //        }
+        //    },
+        //    template: "<div>event:<input type='button' value='event' v-on:click='myEvent(\"自定义事件\")'/></div>>"
+        //});
+        Vue.component("event-component",
+            {
+                methods: {
+                    myEvent: function (value) {
+                        this.$emit('test', value);
+                    }
+                },
+                template: "<div>event:<input type='button' value='event' v-on:click='myEvent'/></div>>"
+            });
+
+        var slot = new Vue({
+            el: "#slot",
+            components: {
+                "slot-component": {
+                    props: { listData: Array },
+                    template: "<div><div>插槽:<slot></slot></div><div>组件传值数据:{{listData}}</div></div>"
+                }
+                //,
+                //"event-component": eventComponent
+            },
+            data: {
+                msg: "插槽内容",
+                list: [{ id: 1, name: "涨涨" }, { id: 2, name: "收索" }]
+            },
+            methods: {
+                myTestEvent: function (value) {
+                    alert("testEvent:" + value);
+                }
+            }
+        });
+    </script>
+}
