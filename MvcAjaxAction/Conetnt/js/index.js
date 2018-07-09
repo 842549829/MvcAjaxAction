@@ -17,7 +17,12 @@
             $.get("/conetnt/template/tableTemplate.html").then(res =>
                 resolve({
                     template: res,
-                    props: ['items', "dataLength"]
+                    props: ['items', "dataLength"],
+                    methods: {
+                        getrows: function (index) {
+                            alert("你选择了第" + (index + 1) + "行");
+                        }
+                    }
                 })
             );
         }
