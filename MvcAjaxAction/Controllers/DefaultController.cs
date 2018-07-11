@@ -122,5 +122,14 @@ namespace MvcAjaxAction.Controllers
         public ActionResult Vue() {
             return View();
         }
+
+        /// <summary>
+        /// Vue1
+        /// </summary>
+        /// <returns>ActionResult</returns>
+        public ActionResult Vue1()
+        {
+            return  View();
+        }
     }
 }

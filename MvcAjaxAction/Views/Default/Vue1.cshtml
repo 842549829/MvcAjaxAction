@@ -1,0 +1,23 @@
+﻿@section Header{
+    <link href="/Conetnt/css/index.css" rel="stylesheet" />
+}
+@{ Html.RenderPartial("~/Views/Shared/_Nav.cshtml"); }
+<div class="container-fluid">
+    <div class="h1">
+        <hr />
+    </div>
+    <h1>组件</h1>
+    <div class="row">
+        <div id="app1">
+        </div>
+    </div>
+</div>
+@section Footer{
+    <script>
+        var app1 = new Vue({
+            el: "#app1",
+            data: {}
+        });
+    </script>
+
+}

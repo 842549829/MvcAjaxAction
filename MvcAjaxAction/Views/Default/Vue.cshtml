@@ -13,8 +13,333 @@
             <event-component v-on:test="myTestEvent"></event-component>
         </div>
     </div>
+    <div class="h1">
+        <hr />
+    </div>
+    <h1>html</h1>
+    <div class="row">
+        <div id="app3">
+            <div v-text="msg"></div>
+            <div v-html="html"></div>
+            <div>{{html}}</div>
+        </div>
+    </div>
+    <div class="h1">
+        <hr />
+    </div>
+    <h1>事件</h1>
+    <div class="row" id="app4">
+        <input value="单击" type="button" v-on:click="action" />
+        <input value="双机" type="button" v-on:dblclick="action1" />
+        <input value="鼠标移动" type="button" v-on:mouseout="action2" v-on:mouseover="action3" />
+        <div v-on:click="show1()">
+            <div v-on:click="show2()">
+                <input value="冒泡事件" type="button" v-on:click.stop="show3($event)" />
+                <a href="https://www.baodi.com" target="_blank" v-on:click.prevent="show4($event)">百度</a>
+            </div>
+        </div>
+        <input v-on:keydown="key1" />keydown<br />
+        <input v-on:keydown.enter="key2" />enter<br />
+        <input v-on:keydown.space="key3" />space<br />
+        <input v-on:keydown.up="key4" />up<br />
+        <input v-on:keydown.right="key5" />right<br />
+        <input v-on:keypress="key6" />keypress<br />
+        <input v-on:keypress.a="key6" />a<br />
+    </div>
+    <div class="h1">
+        <hr />
+    </div>
+    <h1>过滤器</h1>
+    <div class="row" id="app5">
+        <div>{{3.14159 | number(2)}}</div>
+        <div>{{8 | addzero}}</div>
+        <button v-on:click="click1">{{flag | text}}</button>
+        <div v-if="flag">xxxxxxxxx</div>
+    </div>
+    <div class="h1">
+        <hr />
+    </div>
+    <h1>生命周期</h1>
+    <div class="row" id="app6">
+        {{msg}}
+        <br />
+        <button v-on:click="update">更新</button>
+        <button v-on:click="destroy">销毁</button>
+    </div>
+    <div class="h1">
+        <hr />
+    </div>
+    <h1>$watch 计算属性(computed)</h1>
+    <div class="row" id="app7">
+        <input v-model="name" />
+        <h3>{{name}}</h3>
+        <input v-model="age" />
+        <h3>{{age}}</h3>
+        <input v-model="user.id" />
+        <h3>{{user.id}}</h3>
+        <h3>{{text1}}</h3>
+        <input v-model="user.name" />
+        <h3>{{user.name}}</h3>
+        <h3>{{text2}}</h3>
+        <h3>{{info}}</h3>
+    </div>
+    <div class="h1">
+        <hr />
+    </div>
+    <h1>指令</h1>
+    <div class="row" id="app8">
+        <h3 v-hello>{{name}}</h3>
+        <h3 v-hello:ps>{{name}}</h3>
+        <h3 v-hello="{a:'1',b:'2'}">{{name}}</h3>
+        <h3 v-hello2>{{name}}</h3>
+        <input v-focus />
+    </div>
+    <div class="h1">
+        <hr />
+    </div>
 </div>
 @section Footer{
+    <script>
+        Vue.directive("hello",
+            {
+                bind(el, bingding) {
+                    // 指令第一次绑定到元素上时调用，只调用一次，可执行初始化操作
+                    console.log(el, bingding.arg);
+                    el.style.color = "red";
+                },
+                inserted() {
+                    // 被绑定元素插入到dom中时调用
+                },
+                update() {
+                    //被绑定元素所在模版更新时调用
+                },
+                componentUpdated() {
+                    //被绑定元素所在模版完成一次更新周期时调用
+                },
+                unbind() {
+                    //指令与元素解绑时调用，只调用一次
+                }
+            });
+        Vue.directive("hello2",
+            function (el) {
+                el.style.color = "blue";
+            });
+        var app8 = new Vue({
+            el: "#app8",
+            data: {
+                name: "morisreaaa"
+            },
+            methods: {
+            },
+            directives:{
+                focus:{
+                    inserted:function (el) {
+                        el.focus();
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+        var app7 = new Vue({
+            el: "#app7",
+            data: {
+                name: "moris",
+                age: 22,
+                user: {
+                    id: 100,
+                    name: ""
+                },
+                text1: "",
+                text2: ""
+            },
+            methods: {
+                changeUser() {
+                    this.user.name = "xxxx";
+                }
+            },
+            watch: {
+                age: (newValue, oldValue) => {
+                    console.log("age被修改了", newValue, oldValue);
+                    this.text1 = "我的年龄" + newValue + "我的姓名" + this.name;
+                },
+                name: function (val) {
+                    this.text2 = "我的姓名" + val + "我的年龄" + this.age;
+                },
+                user: {
+                    handler: (newValue, oldValue) => {
+                        console.log("user被修改了", newValue, oldValue);
+                    },
+                    deep: true
+                }
+            },
+            computed: {
+                info: {
+                    get: function () {
+                        return "我的年龄" + this.age + "我的姓名" + this.name + "我的用户名称" + this.user.name;
+                    },
+                    set: function (val) {
+                        console.log(val);
+                    }
+                }
+            }
+        });
+        app7.$watch("name",
+            function (newValue, oldValue) {
+                console.log("name被修改了", newValue, oldValue);
+            });
+    </script>
+    <script>
+        var app6 = new Vue({
+            el: "#app6",
+            data: {
+                msg: "welcome"
+            },
+            methods: {
+                update() {
+                    this.msg = "欢迎";
+                },
+                destroy() {
+                    this.$destroy();
+                }
+            },
+            beforeCreate() {
+                console.log("组件实例化刚刚创建,还未进行数据观测事件配置");
+                // 创建钱状态 el 和 data 并未初始化
+                // 添加loading 的标志或者动画之类的
+            },
+            created() {
+                this.msg = "1222";
+                console.log("实例已创建完成,并且已经进行数据观测和时间配置");
+                // 常用 创建完毕状态 完成了data的初始化 el 没有
+                // 删除loading 的标志或者动画之类的
+            },
+            beforeMount() {
+                console.log("模版编译之钱,还没挂载");
+                //挂载钱状态 完成了el和data初始化
+            },
+            mounted() {
+                console.log("模版编译之后,已经挂载，此时菜会有渲染页面，才能看到页面上数据的显示");
+                //常用 挂载结束状态 完成挂载
+                // 得到后台数据
+            },
+            beforeUpdate() {
+                console.log("组件更新之前");
+                //更新前状态
+            },
+            updated() {
+                console.log("组件更新之后");
+                //更新完成状态
+            },
+            beforeDestroy() {
+                console.log("组件销毁之前");
+                // 销毁钱状态
+            },
+            destroyed() {
+                console.log("组件销毁之后");
+                // 销毁完成状态
+            }
+        });
+    </script>
+    <script>
+        Vue.filter('addzero',
+            function (data) {
+                return data >= 10 ? data : "0" + data;
+            });
+
+        Vue.filter('text',
+            function (data) {
+                if (data === true) {
+                    return "显示";
+                } else {
+                    return "隐藏";
+                }
+            });
+
+        var app5 = new Vue({
+            el: "#app5",
+            data: {
+                flag: true
+            },
+            methods: {
+                click1: function () {
+                    this.flag = !this.flag;
+                }
+            },
+            filters: {
+                number: function (data, n) {
+                    return data.toFixed(n);
+                }
+            }
+        });
+    </script>
+    <script>
+        var app4 = new Vue({
+            el: "#app4",
+            data: {
+            },
+            methods: {
+                action: function () {
+                    console.log("单击");
+                },
+                action1: function () {
+                    console.log("双击");
+                },
+                action2: function () {
+                    console.log("移出");
+                },
+                action3: function () {
+                    console.log("移入");
+                },
+                show1: function () {
+                    console.log("1111");
+                },
+                show2: function () {
+                    console.log("2222");
+                },
+                show3: function (e) {
+                    //e.stopPropagation(); //阻止事件冒泡
+                    console.log("3333");
+                },
+                show4: function (e) {
+                    //e.preventDefault(); // 取消事件的默认动作
+                    console.log("4444");
+                },
+                key1: function () {
+                    console.log("key1");
+                },
+                key2: function () {
+                    console.log("key2");
+                },
+                key3: function () {
+                    console.log("key3");
+                },
+                key4: function () {
+                    console.log("key4");
+                },
+                key5: function () {
+                    console.log("key5");
+                },
+                key6: function () {
+                    console.log("key6");
+                },
+                key7: function () {
+                    console.log("key7");
+                }
+            }
+        });
+    </script>
+    <script>
+        var app3 = new Vue({
+            el: "#app3",
+            data: {
+                msg: "Hello World",
+                html: "<span style='color:red;'>123</span>"
+            },
+            methods: {
+            }
+        });
+    </script>
     <script>
         /*
         props: ['title', 'likes', 'isPublished', 'commentIds', 'author']
@@ -37,7 +362,7 @@
         Vue.component("event-component",
             {
                 methods: {
-                    myEvent: function (value) {
+                    myEvent: function(value) {
                         this.$emit('test', value);
                     }
                 },
@@ -59,8 +384,8 @@
                 list: [{ id: 1, name: "涨涨" }, { id: 2, name: "收索" }]
             },
             methods: {
-                myTestEvent: function (value) {
-                    alert("testEvent:" + value);
+                myTestEvent: function(value) {
+                    //alert("testEvent:" + value);
                 }
             }
         });
